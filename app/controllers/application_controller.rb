@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
    def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :acct_type
-    devise_parameter_sanitizer.for(:update_score) << :score
+    # devise_parameter_sanitizer.for(:update_score) << :score
 
    end
 
