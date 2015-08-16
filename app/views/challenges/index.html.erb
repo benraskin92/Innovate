@@ -1,0 +1,16 @@
+<h2 style='text-align: center;'>Challenges</h2>
+
+
+<% @challenge.each do |challenge| %>
+<div class="box">
+<ul id='challenge_index'>
+<li id='title'><%= challenge.title %></li>
+<li>Category: <%= challenge.category %></li>
+<li>Description: <%= challenge.description %></li>
+<li><button><%= link_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution"   %></li></button>
+</ul>
+</div>
+	<% end %>
+
+
+<!-- "/challenges/#{challenge.id}/solutions/add_solution" -->

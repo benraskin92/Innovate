@@ -1,0 +1,41 @@
+  <%= form_for(@challenge) do |f| %>
+  <%= render 'shared/error_messages' %>
+
+<div class="container auth">
+    <h1 class="text-center">Add Challenge</h1>
+    <div id="big-form" class="well auth-box">
+      <form>
+        <fieldset>
+
+          <!-- Form Name -->
+          <legend>Challenge details</legend>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="control-label" for="textinput">Title</label> 
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+
+           <div class="form-group">
+            <label class="control-label" for="textinput">Category</label> 
+            <%= f.text_field :category, class: "form-control" %>
+          </div>
+
+ 		<div class="form-group">
+            <label class="control-label" for="textinput">Description</label>
+            <%= f.text_area :description, :placeholder => "Enter your challenge here..."%>
+          </div>
+
+          	<div id="submit">
+				<%= f.submit "Enter challenge", class: "btn btn-primary" %>
+			</div>
+
+
+
+        </fieldset>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <% end %>

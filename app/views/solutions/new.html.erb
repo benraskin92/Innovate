@@ -1,0 +1,30 @@
+<%= form_for([@challenge, @solution]) do |f| %>
+
+
+<div class="container auth">
+    <h1 class="text-center">Add solution</h1>
+    <div id="big-form" class="well auth-box">
+      <form>
+        <fieldset>
+
+          <!-- Form Name -->
+          <legend>Solution details</legend>
+
+ 		<div class="form-group">
+            <label class="control-label" for="textinput">Solution</label>
+            <%= f.text_area :solution, :placeholder => "Enter your solution here..."%>
+          </div>
+
+          	<div id="submit">
+				<%= f.submit "Enter solution", class: "btn btn-primary" %>
+			</div>
+
+
+
+        </fieldset>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <% end %>
