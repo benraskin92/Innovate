@@ -18,8 +18,13 @@ class SolutionsController < ApplicationController
 	end
 end
 
+	def index
+		@challenge = Challenge.find(params[:challenge_id])
+		@solution = Solution.find_by_sql("SELECT * FROM solutions where challenge_id = #{@challenge.id}")
+	end
+
 	def solution_params
-		params.require(:solution).permit(:solution)
+		params.require(:solution).permit(:solution, :attachment)
 	end
 
 end

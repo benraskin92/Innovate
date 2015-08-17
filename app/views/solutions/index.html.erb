@@ -1,0 +1,14 @@
+<h2 style='text-align: center;'>Solutions</h2>
+
+
+<% @solution.each do |solution| %>
+<div class="solution_box">
+<ul id='challenge_index'>
+<li id='solution'><%= solution.solution %></li>
+<% if solution.attachment.exists? %>
+<li><button><%= link_to "Download Attachment", solution.attachment.url(:original, false) %></button></li>
+<% end %>
+<li><button><%= link_to "Back to Challenges", '/challenges'   %></button></li>
+</ul>
+</div>
+	<% end %>

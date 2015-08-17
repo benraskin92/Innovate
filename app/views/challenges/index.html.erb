@@ -8,9 +8,11 @@
 <li>Category: <%= challenge.category %></li>
 <li>Description: <%= challenge.description %></li>
 <li><button><%= link_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution"   %></li></button>
+<li><button><%= link_to "View Solutions", "/challenges/#{challenge.id}/solutions" %></li></button>
 </ul>
 </div>
 	<% end %>
+<div ></div>
 
 
 <!-- "/challenges/#{challenge.id}/solutions/add_solution" -->

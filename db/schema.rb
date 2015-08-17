@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814230919) do
+ActiveRecord::Schema.define(version: 20150817001650) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "title"
@@ -27,8 +27,12 @@ ActiveRecord::Schema.define(version: 20150814230919) do
   create_table "solutions", force: :cascade do |t|
     t.text     "solution"
     t.integer  "challenge_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   add_index "solutions", ["challenge_id"], name: "index_solutions_on_challenge_id"
