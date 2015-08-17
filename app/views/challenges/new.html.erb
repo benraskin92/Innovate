@@ -18,7 +18,7 @@
 
            <div class="form-group">
             <label class="control-label" for="textinput">Category</label> 
-            <%= f.text_field :category, class: "form-control" %>
+            <%= f.select(:category, options_for_select([['Example','example'],['Example1','example1'],['Example2','example2']]))%>
           </div>
 
  		<div class="form-group">

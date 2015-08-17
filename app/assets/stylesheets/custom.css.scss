@@ -65,12 +65,17 @@ html, body{
   padding-bottom: 5%
 }
 
-ul.footer{
+.contact {
+  margin: 0 10% 0 10%;
+}
+
+ul.footer {
   margin-top: 30px;
   text-align: center;
+  padding-left: 12px;
           }
 
-ul.footer li{
+ul.footer li {
   color: #333;
   display: inline-block;
   }
