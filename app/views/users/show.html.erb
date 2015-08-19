@@ -1,5 +1,12 @@
-<h2 style='text-align: center;'>Challenges</h2>
-
+<div class="container">
+	<div class="row">
+  			<div class="col-md-3" id="leftCol">
+              
+              	<ul class="nav nav-stacked" id="sidebar">
+                  <li><%= @user.first_name %></li>
+              	</ul>
+              
+      		</div> 
 
 <% @challenge.each do |challenge| %>
 <div class="box">
@@ -11,8 +18,5 @@
 <li><button><%= link_to "View Solutions", "/challenges/#{challenge.id}/solutions" %></li></button>
 </ul>
 </div>
-	<% end %>
+  <% end %>
 <div ></div>
-
-
-<!-- "/challenges/#{challenge.id}/solutions/add_solution" -->

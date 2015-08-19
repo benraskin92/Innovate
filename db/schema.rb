@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817001650) do
+ActiveRecord::Schema.define(version: 20150819104206) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "title"
     t.string   "category"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "top_five",    default: false, null: false
   end
 
   add_index "challenges", ["user_id"], name: "index_challenges_on_user_id"
@@ -52,6 +53,9 @@ ActiveRecord::Schema.define(version: 20150817001650) do
     t.datetime "updated_at",                          null: false
     t.string   "acct_type"
     t.integer  "score",                  default: 0
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "bio"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

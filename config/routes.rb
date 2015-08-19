@@ -20,10 +20,13 @@ Rails.application.routes.draw do
   get 'add_challenge' => 'challenges#new'
   get 'challenges' => 'challenges#index'
   get '/challenges/:challenge_id/solutions/add_solution' => 'solutions#new'
+  get 'users/:id' => 'users#show'
 
   resources :challenges do
     resources :solutions
   end
+
+  resources :users
       # devise_for :users, controllers: {
       #   sessions: 'users/sessions'
       # }

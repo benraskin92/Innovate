@@ -5,6 +5,16 @@
     <h1 class="text-center">Sign up</h1>
     <div id="big-form" class="well auth-box">
   <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, class: 'form-control' %>
+  </div>
+
+   <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, class: 'form-control' %>
+  </div>
+
+   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, class: 'form-control' %>
   </div>
