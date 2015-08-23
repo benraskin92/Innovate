@@ -1,22 +1,80 @@
 <div class="container">
-	<div class="row">
-  			<div class="col-md-3" id="leftCol">
-              
-              	<ul class="nav nav-stacked" id="sidebar">
-                  <li><%= @user.first_name %></li>
-              	</ul>
-              
-      		</div> 
+  <div class="row profile">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+            <%= image_tag @user.profile_pic.url %>
+        </div>
+        <!-- END SIDEBAR USERPIC -->
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            <%= @user.first_name %> <%= @user.last_name %>
+          </div>
+        </div>
+      
+    
+    <div class="profile-usermenu">
+          <ul class="nav">
+            <% if @user.id == current_user.id %>
+            <li class="active">
+              <a href="/users/<%= @user.id %>">
+              <i class="glyphicon glyphicon-home"></i>
+              My Profile </a>
+            </li>
+            <li>
+              <a href="/users/<%= @user.id %>/edit">
+              <i class="glyphicon glyphicon-user"></i>
+              Update Profile </a>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-<% @challenge.each do |challenge| %>
-<div class="box">
-<ul id='challenge_index'>
-<li id='title'><%= challenge.title %></li>
-<li>Category: <%= challenge.category %></li>
-<li>Description: <%= challenge.description %></li>
-<li><button><%= link_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution" %></li></button>
-<li><button><%= link_to "View Solutions", "/challenges/#{challenge.id}/solutions" %></li></button>
-</ul>
+  
+<div class="col-md-9">
+  <div class="profile-content">
+    <% if @user.id == current_user.id %>  
+      <h3 class='text-center'>My challenges</h3>
+      <% @challenge.each do |challenge| %>
+    <div class="profile_box">
+      <ul id='challenge_profile'>
+        <li id='title'><%= challenge.title %></li>
+        <li>Category: <%= challenge.category %></li>
+        <li>Description: <%= challenge.description %></li>
+        <li><button><%= link_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution" %></li></button>
+        <li><button><%= link_to "View Solutions", "/challenges/#{challenge.id}/solutions" %></li></button>
+      </ul>
+    </div>
+    <% end %>
+    <h3 class='text-center'>Challenges I'm working on...</h3>
+      <% @working_challenges.each do |working_challenge| %>
+    <div class="profile_box">
+      <ul id='challenge_profile'>
+        <li id='title'><%= working_challenge.title %></li>
+        <li>Category: <%= working_challenge.category %></li>
+        <li>Description: <%= working_challenge.description %></li>
+        <li><button><%= link_to "Challenge", "/challenges/#{working_challenge.id}" %></li></button>
+        <li><button><%= link_to "Test Button", "#" %></li></button>
+      </ul>
+    </div>
+    <% end %>
+    <h3 class='text-center'>My solutions</h3>
+      <% @solution.each do |solution| %>
+    <div class="profile_box">
+      <ul id='challenge_profile'>
+        <li><%= solution.solution %></li>
+        <li><button><%= link_to "Challenge", "/challenges/#{solution.challenge_id}" %></li></button>
+        <li><button><%= link_to "Test Button", "#" %></li></button>
+      </ul>
+    </div>
+      <% end %>
+    <% else %>
+      <%= "You cannot view these challenges" %>
+    <% end %>
+  </div>
 </div>
-  <% end %>
-<div ></div>
+</div>

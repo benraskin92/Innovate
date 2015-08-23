@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150819104206) do
+ActiveRecord::Schema.define(version: 20150823175058) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "title"
@@ -34,28 +34,34 @@ ActiveRecord::Schema.define(version: 20150819104206) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.integer  "user_id"
   end
 
   add_index "solutions", ["challenge_id"], name: "index_solutions_on_challenge_id"
+  add_index "solutions", ["user_id"], name: "index_solutions_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                    default: "", null: false
+    t.string   "encrypted_password",       default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",            default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "acct_type"
-    t.integer  "score",                  default: 0
+    t.integer  "score",                    default: 0
     t.string   "first_name"
     t.string   "last_name"
     t.text     "bio"
+    t.string   "profile_pic_file_name"
+    t.string   "profile_pic_content_type"
+    t.integer  "profile_pic_file_size"
+    t.datetime "profile_pic_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row profile">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+            <%= image_tag @user.profile_pic.url %>
+        </div>
+        <!-- END SIDEBAR USERPIC -->
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            <%= @user.first_name %> <%= @user.last_name %>
+          </div>
+        </div>
+      
+
+    <div class="profile-usermenu">
+          <ul class="nav">
+            <li>
+              <a href="/users/<%= @user.id %>">
+              <i class="glyphicon glyphicon-home"></i>
+              My Profile </a>
+            </li>
+            <li class="active">
+              <a href="/users/<%= @user.id %>/edit">
+              <i class="glyphicon glyphicon-user"></i>
+              Update Profile </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="col-md-9">
+      <div class="profile-content">
+  <h1 id='signup', class='text-center'>Update Profile</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages_edit' %>
+
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: 'form-control' %>
+
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: 'form-control' %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation, "Password Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.label :profile_pic, "Profile Picture" %>
+      <%= f.file_field :profile_pic %>
+<br>
+<br>
+      <%= f.submit "Save Changes", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>
+      </div>
+    </div>
+</div>
