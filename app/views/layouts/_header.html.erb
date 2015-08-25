@@ -19,7 +19,7 @@
           <li><a href="/challenges">View Challenges</a></li>
         <% elsif current_user.acct_type == 'innovator' %> 
           <li><%= link_to "My Profile", "/users/#{current_user.id}" %></li>
-          <li><a href="#">Top Challenges</a></li>
+          <li><a href="/challenges">Top Challenges</a></li>
           <% end %>
           <% end %>
       </ul>

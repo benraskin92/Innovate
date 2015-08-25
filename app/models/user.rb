@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  has_attached_file :profile_pic
+  has_attached_file :profile_pic, :default_url => 'profile_pic_default.png'
 	validates_attachment :profile_pic, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
+
 end
