@@ -24,7 +24,9 @@ class ChallengesController < ApplicationController
 	end
 
 	def index
-		if current_user.acct_type == 'admin'
+		if params[:search]
+    		@challenge = current_user.challenges.search(params[:search]).order("created_at DESC")
+		elsif current_user.acct_type == 'admin'
 			@challenge = Challenge.all
 		elsif current_user.acct_type == 'innovator' 
 			@challenge = current_user.challenges
