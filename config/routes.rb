@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   get '/challenges/:challenge_id/solutions/add_solution' => 'solutions#new'
   get 'users/:id' => 'users#show'
   get 'search' => 'challenges#search_index'
+  get '/category_search/:id/:category' => 'challenges#search_category'
+  post '/challenges/add_top_three' => 'challenges#add_top_three'
+
 
   resources :challenges do
     resources :solutions

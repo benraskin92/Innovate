@@ -20,7 +20,7 @@ class ChallengesController < ApplicationController
 	end
 
 	def challenge_params
-		params.require(:challenge).permit(:title, :category, :description)
+		params.require(:challenge).permit(:title, :category, :description, :top_three_flag)
 	end
 
 	def index
@@ -29,7 +29,33 @@ class ChallengesController < ApplicationController
 		elsif current_user.acct_type == 'admin'
 			@challenge = Challenge.all
 		elsif current_user.acct_type == 'innovator' 
-			@challenge = current_user.challenges
+			@challenge = Challenge.find_by_sql("SELECT * FROM challenges WHERE top_three_flag = 'true'")
+		end
+	end
+
+	def show
+		@challenge = Challenge.find(params[:id])
+	end
+
+	def search_category
+		@current_challenge = Challenge.find(params[:id])
+		@challenge = current_user.challenges.find_by_sql("SELECT * FROM challenges WHERE category = '#{@current_challenge.category}'")
+	end
+
+	def add_top_three
+		@challenge = Challenge.find(params[:id])
+		@all_flags = Challenge.where(top_three_flag: true).count
+		if @challenge.top_three_flag == false && @all_flags < 3
+			@challenge.update_attribute(:top_three_flag, 'true')
+			redirect_to "/challenges"
+			flash[:success] = "#{@challenge.title} is now live!"
+		elsif @challenge.top_three_flag == true
+			@challenge.update_attribute(:top_three_flag, 'false')
+			redirect_to "/challenges"
+			flash[:danger] = "The live flag has been removed for #{@challenge.title}"
+		else
+			redirect_to "/challenges"
+			flash[:danger] = "You can have no more than 3 live challenges at one time"
 		end
 	end
 

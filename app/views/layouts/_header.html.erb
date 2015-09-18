@@ -1,32 +1,35 @@
+<link href='https://fonts.googleapis.com/css?family=Merriweather|Shadows+Into+Light' rel='stylesheet' type='text/css'>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="navbar-header" style="margin: 20px">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Innovate Aladdin</a>
+      <a class="navbar-brand" href="/" style="padding-top: 0px"><h4 style="font-family: 'Merriweather', serif; margin-top: 0px; color: #29A329">innovate<span style="font-family: 'Shadows Into Light', cursive; font-size: 1.4em; color: #121254">Aladdin</span><br>
+      <span style="font-family: 'Merriweather', serif; margin-top: 0px; color: #29A329">by BlackRock</span></h4></a>
     </div>
 
     <% if user_signed_in? %>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" style="padding-top: 15px">
         <li><a href="/add_challenge">Add Challenge<span class="sr-only">(current)</span></a></li>
         
         <% if current_user.acct_type == 'admin' %>
           <li><a href="/challenges">View Challenges</a></li>
         <% elsif current_user.acct_type == 'innovator' %> 
           <li><%= link_to "My Profile", "/users/#{current_user.id}" %></li>
-          <li><a href="/challenges">My Challenges</a></li>
+          <li><a href="/challenges">Top Three Challenges</a></li>
           <% end %>
-          <% end %>
-        <li><%= form_tag(challenges_path, :method => "get", id: "search-form", class: 'navbar-form navbar-left') do %>
+          
+        <li id="header_search"><%= form_tag(challenges_path, :method => "get", id: "search-form", class: 'navbar-form navbar-left') do %>
               <%= text_field_tag :search, params[:search], placeholder: "Search My Challenges", class: 'form-control' %>
               <%= submit_tag "Search", class: 'btn btn-default' %>
               <% end %>
         </li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/about">About</a></li>

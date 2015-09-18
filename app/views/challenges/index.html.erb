@@ -1,18 +1,18 @@
 <h2 style='text-align: center;'>Challenges</h2>
 
-
 <% @challenge.each do |challenge| %>
-<div class="box">
-<ul id='challenge_index'>
-<li id='title'><%= challenge.title %></li>
-<li>Category: <%= challenge.category %></li>
-<li>Description: <%= challenge.description %></li>
-<li><button><%= link_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution" %></li></button>
-<li><button><%= link_to "View Solutions", "/challenges/#{challenge.id}/solutions" %></li></button>
-</ul>
-</div>
+	<div class="box">
+	<ul id='challenge_index'>
+		<li id='title'><%= challenge.title %> <% if challenge.top_three_flag%><span id='live_flag'>Live</span><% end %></li>
+		<li>Category: <%= link_to "#{challenge.category}", "/category_search/#{challenge.id}/#{challenge.category}" %> </li>
+		<li>Description: <%= challenge.description %></li>
+		<li><button><%= link_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution" %></li></button>
+		<li><button><%= link_to "View Solutions", "/challenges/#{challenge.id}/solutions" %></li></button>
+	<% if (current_user.acct_type == 'admin' && challenge.top_three_flag == false) %>
+		<li><%= button_to "Go Live", "/challenges/add_top_three?id=#{challenge.id}" %></li>
+	<% elsif (current_user.acct_type == 'admin' && challenge.top_three_flag == true) %>
+		<li><%= button_to "Remove live flag", "/challenges/add_top_three?id=#{challenge.id}" %></li>
 	<% end %>
-<div ></div>
-
-
-<!-- "/challenges/#{challenge.id}/solutions/add_solution" -->
+	</ul>
+	</div>
+<% end %>

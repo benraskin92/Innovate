@@ -22,7 +22,7 @@ class SolutionsController < ApplicationController
 
 	def index
 		@challenge = Challenge.find(params[:challenge_id])
-		@solution = Solution.find_by_sql("SELECT * FROM solutions where challenge_id = #{@challenge.id}")
+		@solution = Solution.find_by_sql("SELECT * FROM solutions WHERE challenge_id = #{@challenge.id}")
 	end
 
 	def solution_params

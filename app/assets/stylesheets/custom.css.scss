@@ -28,6 +28,7 @@ html, body{
   width: 250px;
   color: black;
   width: 60%;
+  background-color: white;
  }
 
 #challenge_index {
@@ -221,4 +222,14 @@ body {
   padding: 20px;
   background: #fff;
   min-height: 460px;
+}
+
+#live_flag {
+  font-size: .5em; 
+  color: red; 
+  background-color: #FFC0C0; 
+  padding: 3px; 
+  display: inline-block;
+  bottom: 8px;
+  position: relative;  
 }

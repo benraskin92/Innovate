@@ -1,0 +1,14 @@
+<h2 style='text-align: center;'>Search results by category: <i><%= @current_challenge.category  %></i></h2>
+
+<% @challenge.each do |challenge| %>
+<div class="box">
+<ul id='challenge_index'>
+<li id='title'><%= challenge.title %></li>
+<li>Category: <%= link_to "#{challenge.category}", "/category_search/#{challenge.id}/#{challenge.category}" %> </li>
+<li>Description: <%= challenge.description %></li>
+<li><button><%= link_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution" %></li></button>
+<li><button><%= link_to "View Solutions", "/challenges/#{challenge.id}/solutions" %></li></button>
+</ul>
+</div>
+	<% end %>
+<div ></div>
