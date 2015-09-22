@@ -11,17 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916004316) do
+ActiveRecord::Schema.define(version: 20150921102223) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "title"
     t.string   "category"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.boolean  "top_five",       default: false, null: false
-    t.boolean  "top_three_flag", default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.boolean  "top_five",                default: false, null: false
+    t.boolean  "top_three_flag",          default: false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   add_index "challenges", ["user_id"], name: "index_challenges_on_user_id"

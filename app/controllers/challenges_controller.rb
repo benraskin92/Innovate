@@ -20,7 +20,7 @@ class ChallengesController < ApplicationController
 	end
 
 	def challenge_params
-		params.require(:challenge).permit(:title, :category, :description, :top_three_flag)
+		params.require(:challenge).permit(:title, :category, :description, :top_three_flag, :attachment)
 	end
 
 	def index

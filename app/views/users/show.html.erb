@@ -10,9 +10,8 @@
         <!-- SIDEBAR USER TITLE -->
         <div class="profile-usertitle">
           <div class="profile-usertitle-name">
-            <%= @user.first_name %> 
+            <%= "#{@user.first_name} #{@user.last_name}" %> 
             <br>
-            <%= @user.last_name %>
             Score: <%= @user.score %>
           </div>
         </div>
@@ -48,8 +47,8 @@
         <li id='title'><%= challenge.title %></li>
         <li>Category: <%= challenge.category %></li>
         <li>Description: <%= challenge.description %></li>
-        <li><button><%= link_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution" %></li></button>
-        <li><button><%= link_to "View Solutions", "/challenges/#{challenge.id}/solutions" %></li></button>
+        <li><%= button_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution", :method => :get, :class => "myButton" %></li>
+        <li><%= button_to "View Solutions", "/challenges/#{challenge.id}/solutions", :method => :get %></li>
       </ul>
     </div>
     <% end %>
