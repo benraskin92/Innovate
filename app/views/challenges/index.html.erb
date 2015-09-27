@@ -13,6 +13,17 @@
 	<% elsif (current_user.acct_type == 'admin' && challenge.top_three_flag == true) %>
 		<li><%= button_to "Remove live flag", "/challenges/add_top_three?id=#{challenge.id}" %></li>
 	<% end %>
+	<% if current_user.following_challenge?(challenge) %>
+		<%= form_for(current_user.relationships.find_by_followed_id(challenge),
+         html: { method: :delete }) do |f| %>
+ 		 <%= f.submit "Unfollow", class: "btn btn-large" %>
+			<% end %>
+	<% else %>
+		<%= form_for(current_user.relationships.build(followed_id: challenge.id)) do |f| %>
+  			<div><%= f.hidden_field :followed_id %></div>
+ 		 <%= f.submit "Follow", class: "btn btn-large btn-primary" %>
+		<% end %>
+		<% end %>
 	</ul>
 	</div>
 <% end %>

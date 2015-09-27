@@ -28,8 +28,8 @@ class ChallengesController < ApplicationController
     		@challenge = current_user.challenges.search(params[:search]).order("created_at DESC")
 		elsif current_user.acct_type == 'admin'
 			@challenge = Challenge.all
-		elsif current_user.acct_type == 'innovator' 
-			@challenge = Challenge.find_by_sql("SELECT * FROM challenges WHERE top_three_flag = 'true'")
+		elsif current_user.acct_type == 'innovator'
+			@challenge = Challenge.where(:top_three_flag => true) 
 		end
 	end
 

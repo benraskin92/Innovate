@@ -28,9 +28,13 @@ Rails.application.routes.draw do
 
   resources :challenges do
     resources :solutions
+    member do
+    get :following
+  end 
   end
 
   resources :users
+  resources :relationships, only: [:create, :destroy]
       # devise_for :users, controllers: {
       #   sessions: 'users/sessions'
       # }

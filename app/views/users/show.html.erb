@@ -53,13 +53,13 @@
     </div>
     <% end %>
     <h3 class='text-center'>Challenges I'm working on...</h3>
-      <% @working_challenges.each do |working_challenge| %>
+      <% @my_challenges.each do |my_challenge| %>
     <div class="profile_box">
       <ul id='challenge_profile'>
-        <li id='title'><%= working_challenge.title %></li>
-        <li>Category: <%= working_challenge.category %></li>
-        <li>Description: <%= working_challenge.description %></li>
-        <li><button><%= link_to "Challenge", "/challenges/#{working_challenge.id}" %></li></button>
+        <li id='title'><%= my_challenge.title %></li>
+        <li>Category: <%= my_challenge.category %></li>
+        <li>Description: <%= my_challenge.description %></li>
+        <li><button><%= link_to "Challenge", "/challenges/#{my_challenge.id}" %></li></button>
         <li><button><%= link_to "Test Button", "#" %></li></button>
       </ul>
     </div>

@@ -5,8 +5,10 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@challenge = @user.challenges
 		@solution = @user.solutions
-    @working_challenges = Challenge.find_by_sql("SELECT c.* FROM challenges c, solutions s WHERE s.challenge_id = c.id AND s.user_id = #{current_user.id} ")
-	end
+    @working_challenges = Challenge.find_by_sql("SELECT c.* FROM challenges c, solutions s WHERE s.challenge_id = c.id AND s.user_id = #{current_user.id}") 
+    @following_challenges = Challenge.find_by_sql("SELECT c.* FROM challenges c, relationships r WHERE c.id = r.followed_id AND r.follower_id = #{current_user.id}")
+    @my_challenges = @working_challenges | @following_challenges	   
+  end
 
 	def edit
     	@user = User.find(params[:id])

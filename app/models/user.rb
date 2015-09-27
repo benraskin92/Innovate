@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :challenges
   has_many :solutions
+  has_many :relationships, foreign_key: "follower_id"
+  has_many :followed_challenges, through: :relationships, source: :challenge
+
 
   before_save { self.email = email.downcase }
 	validates :first_name, presence: true, length: { maximum: 50 }
@@ -18,5 +21,17 @@ class User < ActiveRecord::Base
 
   has_attached_file :profile_pic, :default_url => 'profile_pic_default.png'
 	validates_attachment :profile_pic, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
+
+def following_challenge?(challenge)
+  relationships.find_by_followed_id(challenge.id)
+end
+
+def follow_challenge!(challenge)
+  relationships.create!(followed_id: challenge.id)
+end
+
+def challenge_unfollow!(challenge)
+  relationships.find_by_followed_id(challenge).destroy
+end
 
 end

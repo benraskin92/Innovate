@@ -1,6 +1,8 @@
 class Challenge < ActiveRecord::Base
   belongs_to :user
   has_many :solutions
+  has_many :relationships, foreign_key: "followed_id"
+  has_many :followed_by, through: :relationships, source: :user
 
   validates :title, presence: true
   validates :category, presence: true
