@@ -1,1 +1,6 @@
 #SELECT c.* FROM challenges c, solutions s, relationships r WHERE s.challenge_id = c.id AND c.id = r.followed_idAND (s.user_id = #{current_user.id} OR r.follower_id = #{current_user.id} )
+
+
+<% case challenge.category when 'OMS' %>
+	<%= link_to "Order Management System", "/category_search/#{challenge.id}/#{challenge.category}" %>
+	<% end %>

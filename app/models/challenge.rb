@@ -13,7 +13,7 @@ class Challenge < ActiveRecord::Base
 
 	def self.search(search)
 		if search 
-			where 'title LIKE ?', "%#{search}%"
+			where 'LOWER(title) LIKE ? OR LOWER(description) LIKE ?', "%#{search.downcase}%", "%#{search.downcase}%"
 		else
 			puts 'No results'
 		end

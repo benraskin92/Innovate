@@ -8,8 +8,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
+  #  def create
+  #    super
+  #    flash[:success] = 'Welcome to innovateAladdin!'
   # end
 
   # GET /resource/edit

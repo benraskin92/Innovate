@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :challenges
-  has_many :solutions
+  has_many :challenges, dependent: :destroy
+  has_many :solutions, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id"
   has_many :followed_challenges, through: :relationships, source: :challenge
 
@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true  
 
   has_attached_file :profile_pic, :default_url => 'profile_pic_default.png'
 	validates_attachment :profile_pic, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'search' => 'challenges#search_index'
   get '/category_search/:id/:category' => 'challenges#search_category'
   post '/challenges/add_top_three' => 'challenges#add_top_three'
+  get '/challenges/:challenge_id/edit' => 'challenges#edit'
 
 
   resources :challenges do

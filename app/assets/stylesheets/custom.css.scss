@@ -15,6 +15,11 @@ html, body{
     height: 100%
 }
 
+.titles {
+  font-family: 'Patrick Hand', cursive;
+  text-align: center;
+}
+
 .box {
   margin: 2% 0 0 20%;
 	padding: 5px;
@@ -59,6 +64,7 @@ html, body{
   color: black;
   width: 60%;
   min-height: 150px;
+  background-color: white;
   /*height: auto*/
  }
 
@@ -84,6 +90,7 @@ html, body{
   color: black;
   width: 90%;
   min-height: 150px;
+  background-color: #fff;
   /*height: auto*/
  }
 
@@ -96,9 +103,18 @@ html, body{
 
 #challenge_profile #title {
   font-size: 2em;
-  padding-bottom: 5%;
+  padding-bottom: 2%;
   padding-top: 5%;
   text-align: left;
+  border-bottom: solid;
+ }
+
+ #challenge_body {
+  padding-top: 2%;
+ }
+
+ #challenge_body li {
+  margin-top: 2%;
  }
 
 ul.footer {
@@ -220,7 +236,7 @@ body {
 /* Profile Content */
 .profile-content {
   padding: 20px;
-  background: #fff;
+  background: #F1F3FA;
   min-height: 460px;
 }
 
@@ -274,3 +290,53 @@ body {
   position:relative;
   top:1px;
 }
+
+
+/*flash*/
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.btn-group {
+  width: 100%;
+}
+
+/*div.btn-group form{
+  display: inline;
+  float: center;
+  text-align: center;
+}*/
+
+#site_button {
+  display: inline;
+  text-align: center;
+  width: 50%;
+  float: center;
+  margin: 0 25% 0 25%;
+}
+
+

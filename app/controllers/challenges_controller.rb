@@ -59,4 +59,23 @@ class ChallengesController < ApplicationController
 		end
 	end
 
+  	def edit
+  		@challenge = Challenge.find(params[:challenge_id])
+  		if current_user.id == @challenge.user_id
+  			@challenge = Challenge.find(params[:challenge_id])
+  		else
+  			redirect_to root_path
+  			flash[:danger] = "You do not have permissions to view this page."
+  		end
+  	end
+
+  	def update
+  		@challenge = Challenge.find(params[:id])
+  		if @challenge.update_attributes(challenge_params)
+  			flash[:success] = "Challenge updated!"
+  			redirect_to root_path
+  		else
+  			render 'edit'
+  		end
+  	end
 end
