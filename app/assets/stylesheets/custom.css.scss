@@ -15,14 +15,82 @@ html, body{
     height: 100%
 }
 
+.container.index_box {
+  position: fixed;
+}
+
 .titles {
   font-family: 'Patrick Hand', cursive;
   text-align: center;
 }
 
-.box {
-  margin: 2% 0 0 20%;
+.index_box {
+  margin: 2% 0 0 2%;
 	padding: 5px;
+  font-size: 11px;
+  line-height: 1.5em;
+  /*float: center;*/
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px #444;
+  height: 500px;
+  color: black;
+  min-width: 250px;
+  max-width: 350px;
+  background-color: white;
+  position: relative;
+  float: left;
+  display: block;
+  overflow: scroll;
+ }
+
+#challenge_index {
+ 	list-style: none;
+ 	font-size: 1.25em;
+  padding-left: 0;
+  display: inline-block;
+ }
+
+#challenge_index #title {
+ 	font-size: 2em;
+ 	padding-bottom: 5%;
+  padding-top: 5%;
+  text-align: left;
+ }
+
+ #challenge_index #description {
+  color: blue;
+  overflow: hidden;
+  margin-bottom: 5%;
+ }
+
+
+
+ #site_button {
+  display: inline;
+  text-align: center;
+  width: 50%;
+  float: center;
+  margin: 0 25% 0 25%;
+}
+
+#index_button {
+  display: inline;
+  text-align: center;
+  width: 70%;
+  float: left;
+  margin: 0 15% 0 15%;
+}
+
+.btn-group {
+  position: relative;
+  bottom: 0;
+}
+
+ .box {
+  margin: 2% 0 0 20%;
+  padding: 5px;
   font-size: 11px;
   line-height: 1.4em;
   /*float: center;*/
@@ -34,20 +102,6 @@ html, body{
   color: black;
   width: 60%;
   background-color: white;
- }
-
-#challenge_index {
- 	list-style: none;
- 	font-size: 1.25em;
-  padding-left: 0;
-
- }
-
-#challenge_index #title {
- 	font-size: 2em;
- 	padding-bottom: 5%;
-  padding-top: 5%;
-  text-align: left;
  }
 
 .solution_box {
@@ -132,6 +186,7 @@ ul.footer li {
   left: 0;
   position: absolute;
   right: 0;
+  top: 50;
   /*text-align: center;*/
     }
 
@@ -241,13 +296,15 @@ body {
 }
 
 #live_flag {
-  font-size: .5em; 
+  font-size: 1em; 
   color: red; 
-  background-color: #FFC0C0; 
-  padding: 3px; 
-  display: inline-block;
-  bottom: 8px;
-  position: relative;  
+  background-color: #FFC0C0;  
+  display: inline;
+  position: relative; 
+  margin-top: 2px;
+  padding: 3px;
+  top: 3px;
+
 }
 
 .myButton {
@@ -324,19 +381,3 @@ body {
 .btn-group {
   width: 100%;
 }
-
-/*div.btn-group form{
-  display: inline;
-  float: center;
-  text-align: center;
-}*/
-
-#site_button {
-  display: inline;
-  text-align: center;
-  width: 50%;
-  float: center;
-  margin: 0 25% 0 25%;
-}
-
-

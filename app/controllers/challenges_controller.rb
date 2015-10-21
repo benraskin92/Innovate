@@ -45,17 +45,43 @@ class ChallengesController < ApplicationController
 	def add_top_three
 		@challenge = Challenge.find(params[:id])
 		@all_flags = Challenge.where(top_three_flag: true).count
-		if @challenge.top_three_flag == false && @all_flags < 3
-			@challenge.update_attribute(:top_three_flag, 'true')
+		if @challenge.top_three_flag == false && @all_flags < 3 && current_user.acct_type == 'admin'
+			@challenge.update_attribute(:top_three_flag, true)
 			redirect_to "/challenges"
 			flash[:success] = "#{@challenge.title} is now live!"
-		elsif @challenge.top_three_flag == true
-			@challenge.update_attribute(:top_three_flag, 'false')
+		elsif @challenge.top_three_flag == true && @challenge.voting_stage == false && current_user.acct_type == 'admin'
+			@challenge.update_attribute(:top_three_flag, false)
 			redirect_to "/challenges"
 			flash[:danger] = "The live flag has been removed for #{@challenge.title}"
 		else
 			redirect_to "/challenges"
-			flash[:danger] = "You can have no more than 3 live challenges at one time"
+			flash[:danger] = "You can have no more than 3 live challenges at one time."
+		end
+	end
+
+	def voting_stage
+		@challenge = Challenge.find(params[:id])
+		if @challenge.top_three_flag == true && @challenge.voting_stage == false
+			@challenge.update_attribute(:voting_stage, true)
+			redirect_to '/challenges'
+			flash[:success] = 'Voting stage initiated: challenge is now CLOSED'
+		elsif @challenge.top_three_flag == true && @challenge.voting_stage == true
+			@challenge.update_attribute(:voting_stage, false)
+			redirect_to '/challenges'
+			flash[:danger] = 'Voting stage removed: challenge has been REOPENED'
+		end
+	end
+
+	def participate_stage
+		@challenge = Challenge.find(params[:id])
+		if @challenge.top_three_flag == true && @challenge.voting_stage == true && @challenge.participate_stage == false
+			@challenge.update_attribute(:participate_stage, true)
+			redirect_to "/challenges"
+			flash[:success] = "Challenge is now in the participate stage"
+		elsif @challenge.top_three_flag == true && @challenge.voting_stage == true && @challenge.participate_stage == true
+			@challenge.update_attribute(:participate_stage, false)
+			redirect_to "/challenges"
+			flash[:danger] = "Challenge has been removed from the participate stage"
 		end
 	end
 

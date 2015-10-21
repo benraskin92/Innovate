@@ -1,39 +1,65 @@
 <h2 class='titles'>Challenges</h2>
 
+<div class="container">
 <% @challenge.each do |challenge| %>
-	<div class="box">
-	<ul id='challenge_profile'>
-		<li id='title'><%= challenge.title %> <% if challenge.top_three_flag%><span id='live_flag'>Live</span><% end %></li>
+	<div class="index_box">
+		<ul id='challenge_index'>
+			<li id='title'><%= challenge.title %></li>
+			<li><% if challenge.top_three_flag%><span id='live_flag'>Live</span><% end %></li>
 		<div id='challenge_body'>
-		<li>Category: 
-			<% case challenge.category when 'OMS' %>
-				<%= link_to "Order Management System", "/category_search/#{challenge.id}/#{challenge.category}" %>
-				<% when 'db' %>
-				<%= link_to "Databases", "/category_search/#{challenge.id}/#{challenge.category}" %>
-				<% when 'example2' %>
-				<%= link_to "Test", "/category_search/#{challenge.id}/#{challenge.category}" %>
-				<% end %> 
-		</li>
-		<li>Description: <%= challenge.description %></li>
-	</div>
-		<button><li><%= link_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution" %></li></button>
-		<button><li><%= link_to "View Solutions", "/challenges/#{challenge.id}/solutions" %></li></button>
-	<% if (current_user.acct_type == 'admin' && challenge.top_three_flag == false) %>
-		<li><%= button_to "Go Live", "/challenges/add_top_three?id=#{challenge.id}" %></li>
-	<% elsif (current_user.acct_type == 'admin' && challenge.top_three_flag == true) %>
-		<li><%= button_to "Remove live flag", "/challenges/add_top_three?id=#{challenge.id}" %></li>
-	<% end %>
-	<% if current_user.following_challenge?(challenge) && challenge.top_three_flag == true %>
+			<li>Stage: 
+				<% if challenge.voting_stage == true && challenge.participate_stage == false %>
+				<%= "Challenge is closed, solutions are being selected" %>
+				<% elsif challenge.voting_stage == true && challenge.participate_stage == true %>
+				<%= "Participate stage" %>
+				<% end %>
+			</li>
+			<li>Category: 
+				<% case challenge.category when 'doc' %>
+					<%= link_to "Documentation", "/category_search/#{challenge.id}/#{challenge.category}" %>
+					<% when 'db' %>
+					<%= link_to "Database", "/category_search/#{challenge.id}/#{challenge.category}" %>
+					<% when 'tools' %>
+					<%= link_to "Aladdin Tools", "/category_search/#{challenge.id}/#{challenge.category}" %>
+					<% when 'gen' %>
+					<%= link_to "Blue-Sky (general)", "/category_search/#{challenge.id}/#{challenge.category}" %>
+					<% end %> 
+			</li>
+			<li id='description'>Description: <%= challenge.description %></li>
+		</div>
+		<div class="btn-group" role="group" aria-label="...">
+		<%= button_to "Add Solution", "/challenges/#{challenge.id}/solutions/add_solution", :method => :get, :class => "btn btn-default", :id =>'index_button', :type => "button"  %>
+		<% if (current_user.following_challenge?(challenge)) || current_user.acct_type == 'admin' %>
+		<%= button_to "View Solutions", "/challenges/#{challenge.id}/solutions", :method => :get, :class => "btn btn-default", :id =>'index_button', :type => "button" %>
+		<% end %>
+		<% if (current_user.acct_type == 'admin' && challenge.top_three_flag == false) %>
+			<li><%= button_to "Go Live", "/challenges/add_top_three?id=#{challenge.id}", :class => "btn btn-default", :id =>'index_button', :type => "button" %></li>
+		<% elsif (current_user.acct_type == 'admin' && challenge.top_three_flag == true && challenge.voting_stage == false) %>
+			<li><%= button_to "Remove live flag", "/challenges/add_top_three?id=#{challenge.id}", :class => "btn btn-default", :id =>'index_button', :type => "button" %></li>
+		<% end %>
+		<% if (current_user.acct_type == 'admin' && challenge.voting_stage == false && challenge.top_three_flag == true) %>
+			<li><%=button_to "Enter Voting Stage", "/challenges/voting_stage?id=#{challenge.id}", :class => "btn btn-default", :id =>'index_button', :type => "button" %></li>
+		<% elsif (current_user.acct_type == 'admin' && challenge.voting_stage == true && challenge.top_three_flag == true && challenge.participate_stage == false) %>
+			<li><%=button_to "Leave Voting Stage", "/challenges/voting_stage?id=#{challenge.id}", :class => "btn btn-default", :id =>'index_button', :type => "button" %></li>
+			<% end %>
+		<% if (current_user.acct_type == 'admin' && challenge.voting_stage == true && challenge.top_three_flag == true && challenge.participate_stage == false) %>
+			<li><%=button_to "Enter Participate Stage", "/challenges/participate_stage?id=#{challenge.id}", :class => "btn btn-default", :id =>'index_button', :type => "button" %></li>
+		<% elsif (current_user.acct_type == 'admin' && challenge.voting_stage == true && challenge.top_three_flag == true && challenge.participate_stage == true) %>
+			<li><%=button_to "Leave Participate Stage", "/challenges/participate_stage?id=#{challenge.id}", :class => "btn btn-default", :id =>'index_button', :type => "button" %></li>
+			<% end %>
+	<% if current_user.following_challenge?(challenge) && challenge.top_three_flag == true && current_user.acct_type == 'innovator' %>
 		<%= form_for(current_user.relationships.find_by_followed_id(challenge),
          html: { method: :delete }) do |f| %>
- 		 <%= f.submit "Unfollow", class: "btn btn-large" %>
+ 		 <%= f.submit "Unfollow", :id =>'index_button', :class => "btn btn-default", :id =>'index_button'%>
 			<% end %>
-	<% elsif challenge.top_three_flag == true %>
+	<% elsif challenge.top_three_flag == true && current_user.acct_type == 'innovator' && challenge.participate_stage == true %>
 		<%= form_for(current_user.relationships.build(followed_id: challenge.id)) do |f| %>
   			<div><%= f.hidden_field :followed_id %></div>
- 		 <%= f.submit "Follow", class: "btn btn-large btn-primary" %>
+ 		 <%= f.submit "Follow", :id =>'index_button', :class => "btn btn-default", :id =>'index_button' %>
 		<% end %>
 		<% end %>
-	</ul>
 	</div>
+</div>
+</ul>
 <% end %>
+</div>

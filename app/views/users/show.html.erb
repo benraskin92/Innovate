@@ -47,15 +47,15 @@
         <li id='title'><%= challenge.title %></li>
       <div id='challenge_body'>
         <li>Category: 
-      <% case challenge.category when 'OMS' %>
-        <%= link_to "Order Management System", "/category_search/#{challenge.id}/#{challenge.category}" %>
-        <% when 'db' %>
-        <%= link_to "Databases", "/category_search/#{challenge.id}/#{challenge.category}" %>
-        <% when 'example2' %>
-        <%= link_to "Test", "/category_search/#{challenge.id}/#{challenge.category}" %>
-        <% when 'doc' %>
-        <%= link_to "Documentation", "/category_search/#{challenge.id}/#{challenge.category}" %>
-        <% end %> 
+          <% case challenge.category when 'doc' %>
+              <%= link_to "Documentation", "/category_search/#{challenge.id}/#{challenge.category}" %>
+            <% when 'db' %>
+              <%= link_to "Database", "/category_search/#{challenge.id}/#{challenge.category}" %>
+            <% when 'tools' %>
+              <%= link_to "Aladdin Tools", "/category_search/#{challenge.id}/#{challenge.category}" %>
+            <% when 'gen' %>
+              <%= link_to "Blue-Sky (general)", "/category_search/#{challenge.id}/#{challenge.category}" %>
+          <% end %> 
       </li>
         <li>Description: <%= challenge.description %></li>
       </div>
@@ -72,7 +72,17 @@
     <div class="profile_box">
       <ul id='challenge_profile'>
         <li id='title'><%= my_challenge.title %></li>
-        <li>Category: <%= my_challenge.category %></li>
+        <li>Category: 
+        <% case my_challenge.category when 'doc' %>
+          <%= link_to "Documentation", "/category_search/#{my_challenge.id}/#{my_challenge.category}" %>
+          <% when 'db' %>
+          <%= link_to "Database", "/category_search/#{my_challenge.id}/#{my_challenge.category}" %>
+          <% when 'tools' %>
+          <%= link_to "Aladdin Tools", "/category_search/#{my_challenge.id}/#{my_challenge.category}" %>
+          <% when 'gen' %>
+          <%= link_to "Blue-Sky (general)", "/category_search/#{my_challenge.id}/#{my_challenge.category}" %>
+          <% end %> 
+      </li>
         <li>Description: <%= my_challenge.description %></li>
         <div class="btn-group" role="group" aria-label="...">
         <%= button_to "Challenge", "/challenges/#{my_challenge.id}", :method => :get, :class => "btn btn-default", :id =>'site_button', :type => "button" %>

@@ -3,7 +3,12 @@ class SolutionsController < ApplicationController
 
 	def new
 		@challenge = Challenge.find(params[:challenge_id])
-		@solution = Solution.new
+		if @challenge.voting_stage == false && @challenge.top_three_flag == true
+			@solution = Solution.new
+		else
+			redirect_to "/challenges"
+			flash[:danger] = "This function is not allowed."
+		end
 	end
 
 	def create
@@ -22,7 +27,31 @@ class SolutionsController < ApplicationController
 
 	def index
 		@challenge = Challenge.find(params[:challenge_id])
-		@solution = Solution.find_by_sql("SELECT * FROM solutions WHERE challenge_id = #{@challenge.id}")
+		if current_user.acct_type == 'innovator'
+			@solution = Solution.find_by_sql("SELECT * FROM solutions WHERE challenge_id = #{@challenge.id} AND top_flag = 't'")
+		elsif current_user.acct_type == 'admin'
+			@solution = Solution.find_by_sql("SELECT * FROM solutions WHERE challenge_id = #{@challenge.id}")
+		end
+	end
+
+	def top_flag
+		@solution = Solution.find(params[:id])
+		@challenge1 = Challenge.where(id: "#{@solution.challenge.id}")
+		# @challenge = Challenge.find_by_sql("SELECT * FROM challenges WHERE id = #{@solution.challenge_id}")
+		# @three_flagss = Solution.find_by_sql("SELECT * FROM solutions s WHERE s.challenge_id = #{@challenge1.id} AND s.top_flag = 'true'")
+		@three_flags = Solution.where(challenge_id: "#{@solution.challenge_id}", top_flag: true)
+		if current_user.acct_type == 'admin' && @solution.top_flag == false && @three_flags.count < 3
+			@solution.update_attribute(:top_flag, true)
+			redirect_to(:back)
+			flash[:success] = 'Solution is now flagged!'
+		elsif current_user.acct_type == 'admin' && @solution.top_flag == true
+			@solution.update_attribute(:top_flag, false)
+			redirect_to(:back)
+			flash[:danger] = 'Solution is now NOT flagged!'
+		else
+			redirect_to(:back)
+			flash[:danger] = 'No more than 3 solutions can be flagged!'
+		end
 	end
 
 	def solution_params

@@ -1,4 +1,4 @@
-<h2 class='titles'>Solutions</h2>
+<h2 class='titles'>Solutions for '<%= @challenge.title %>'</h2>
 
 
 <% @solution.each do |solution| %>
@@ -6,9 +6,14 @@
 <ul id='challenge_index'>
 <li id='solution'><%= solution.solution %></li>
 <% if solution.attachment.exists? %>
-<li><button><%= link_to "Download Attachment", solution.attachment.url(:original, false) %></button></li>
+<li><%= button_to "Download Attachment", solution.attachment.url(:original, false), :method => :get, :class => "btn btn-default", :id =>'site_button', :type => "button"   %></li>
 <% end %>
-<li><button><%= link_to "Back to Challenges", '/challenges'   %></button></li>
+<li><%= button_to "Back to Challenges", '/challenges', :method => :get, :class => "btn btn-default", :id =>'site_button', :type => "button" %></li>
+<% if solution.top_flag == false && current_user.acct_type == 'admin' %>
+<%= button_to "Flag Solution", "/solutions/top_flag?id=#{solution.id}", :class => "btn btn-default", :id =>'site_button', :type => "button" %>
+<% elsif solution.top_flag == true && current_user.acct_type == 'admin' %>
+<%= button_to "Remove Flag", "/solutions/top_flag?id=#{solution.id}", :class => "btn btn-default", :id =>'site_button', :type => "button" %>
+<% end %>
 </ul>
 </div>
 	<% end %>
