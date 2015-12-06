@@ -20,7 +20,7 @@ class ChallengesController < ApplicationController
 	end
 
 	def challenge_params
-		params.require(:challenge).permit(:title, :category, :description, :top_three_flag, :attachment)
+		params.require(:challenge).permit(:title, :category, :description, :top_three_flag, :attachment, :quick_fix)
 	end
 
 	def index
@@ -45,12 +45,15 @@ class ChallengesController < ApplicationController
 	def add_top_three
 		@challenge = Challenge.find(params[:id])
 		@all_flags = Challenge.where(top_three_flag: true).count
+		@post_owner = User.find("#{@challenge.user_id}")
 		if @challenge.top_three_flag == false && @all_flags < 3 && current_user.acct_type == 'admin'
 			@challenge.update_attribute(:top_three_flag, true)
+			update_score_user(@post_owner, 'select_challenge')
 			redirect_to "/challenges"
 			flash[:success] = "#{@challenge.title} is now live!"
 		elsif @challenge.top_three_flag == true && @challenge.voting_stage == false && current_user.acct_type == 'admin'
 			@challenge.update_attribute(:top_three_flag, false)
+			downgrade_score(@post_owner, 'select_challenge')
 			redirect_to "/challenges"
 			flash[:danger] = "The live flag has been removed for #{@challenge.title}"
 		else

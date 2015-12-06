@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020104940) do
+ActiveRecord::Schema.define(version: 20151027104511) do
 
   create_table "challenges", force: :cascade do |t|
     t.string   "title"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20151020104940) do
     t.datetime "attachment_updated_at"
     t.boolean  "voting_stage",            default: false
     t.boolean  "participate_stage",       default: false
+    t.boolean  "quick_fix",               default: false
   end
 
   add_index "challenges", ["user_id"], name: "index_challenges_on_user_id"

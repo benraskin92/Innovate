@@ -22,6 +22,15 @@
             <%= f.select(:category, options_for_select([['Database','db'],['Documentation','doc'],['Aladdin Tools','tools'],['Blue-Sky (general)','gen']]))%>
           </div>
 
+          <div class="form-group">
+            <label class="control-label" for="textinput">Quick Fix?</label>
+            <br> 
+            <%= f.radio_button(:quick_fix, true)%>
+            <%= f.label(:quick_fix, 'Yes')%>
+            <%= f.radio_button(:quick_fix, false)%>
+            <%= f.label(:quick_fix, 'No')%>
+          </div>
+
  		<div class="form-group">
             <label class="control-label" for="textinput">Description</label>
             <%= f.text_area :description, :placeholder => "Enter your challenge here..."%>

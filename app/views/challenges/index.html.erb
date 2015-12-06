@@ -8,7 +8,9 @@
 			<li><% if challenge.top_three_flag%><span id='live_flag'>Live</span><% end %></li>
 		<div id='challenge_body'>
 			<li>Stage: 
-				<% if challenge.voting_stage == true && challenge.participate_stage == false %>
+				<% if challenge.top_three_flag == true && challenge.voting_stage == false %>
+				<%= "Challenge is live, please submit solutions." %>
+				<% elsif challenge.voting_stage == true && challenge.participate_stage == false %>
 				<%= "Challenge is closed, solutions are being selected" %>
 				<% elsif challenge.voting_stage == true && challenge.participate_stage == true %>
 				<%= "Participate stage" %>

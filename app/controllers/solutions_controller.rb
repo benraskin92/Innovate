@@ -18,8 +18,9 @@ class SolutionsController < ApplicationController
 		@solution.challenge_id = challenge.id
 		@solution.user_id = user.id
 		if @solution.save
+			update_score_user(user, 'solution')
 			redirect_to root_path
-			flash[:success] = 'Solution has been accepted!'
+			flash[:success] = 'Solution has been accepted! You have earned 10 points!'
 		else
 			render 'new'
 		end

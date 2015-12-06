@@ -27,6 +27,24 @@ class ApplicationController < ActionController::Base
     @user.update_attribute(:score, orig_score += 10)
   end
 
+  def update_score_user(user, type)
+    orig_score = user.score
+    if type == 'select_challenge'
+      user.update_attribute(:score, orig_score += 25)
+    elsif type == 'solution'
+      user.update_attribute(:score, orig_score += 10)
+    end 
+  end
+
+  def downgrade_score(user, type)
+    orig_score = user.score
+    if type == 'select_challenge'
+      user.update_attribute(:score, orig_score -= 25)
+    elsif type == 'solution'
+      user.update_attribute(:score, orig_score -= 10)
+    end      
+  end
+
   def challenge_owner
     @challenge = Challenge.find(params[:id])
     if current_user.id == @challenge.user_id
